@@ -1,5 +1,10 @@
 pipeline {
      agent any
+     
+     environment {
+  BRANCH = "main"
+  GIT_REPO = "https://github.com/gaitondvishal/vishal-pipeline.git"
+}
      stages {
       stage('BUILD') {
        steps {
