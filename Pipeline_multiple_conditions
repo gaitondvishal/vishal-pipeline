@@ -1,0 +1,39 @@
+pipeline{
+    agent any
+      environment {
+	        BUILD_COMPLETE = false
+			}
+    stages{
+        stage('A'){
+            steps{
+            steps{
+                catchError(BuildResult="success",BuildResult="Failed")
+				}
+			script{
+                    BUILD_COMPLETE=true			
+                }
+			}
+		}	
+        stage('B'){
+            when {
+                expression {
+                    BUILD_COMPLETE == true
+                }
+            }
+            steps{
+                echo 'Stage B is running'
+            }
+        }
+
+        stage('C'){
+            when {
+                expression {
+                    BUILD_COMPLETE == false
+                }
+            }
+            steps{
+                echo 'Stage C is running'
+            }
+        }
+    }
+}
