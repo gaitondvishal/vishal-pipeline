@@ -4,9 +4,9 @@ pipeline{
 	        BUILD_COMPLETE = false
 			}
     stages{
-        stage('A'){
-            steps{
-            steps{
+        stage('A') {
+            steps {
+            steps {
                 catchError(BuildResult="success",BuildResult="Failed")
 				}
 			script{
@@ -14,24 +14,24 @@ pipeline{
                 }
 			}
 		}	
-        stage('B'){
+        stage('B') {
             when {
                 expression {
                     BUILD_COMPLETE == true
                 }
             }
-            steps{
+            steps {
                 echo 'Stage B is running'
             }
         }
 
-        stage('C'){
+        stage('C') {
             when {
                 expression {
                     BUILD_COMPLETE == false
                 }
             }
-            steps{
+            steps {
                 echo 'Stage C is running'
             }
         }
